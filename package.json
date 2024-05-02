@@ -4,7 +4,7 @@
   "description": "My first backend project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node 02-05-2024/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -12,5 +12,8 @@
     "webservices"
   ],
   "author": "Divyansh",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node-wifi": "^2.0.16"
+  }
 }
