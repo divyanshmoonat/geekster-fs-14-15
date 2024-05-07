@@ -16,7 +16,7 @@ const getWebPageData = async (url) => {
     const response = await axios.get(url, {
       headers,
     });
-    const strData = JSON.stringify(response.data);
+    const strData = response.data;
     fs.writeFileSync("webpagedata.txt", strData);
     // console.log(JSON.stringify(response.data));
   } catch (err) {
@@ -33,80 +33,17 @@ const getDataFromFile = () => {
 const pageHtmlString = getDataFromFile();
 
 const $ = cheerio.load(pageHtmlString);
-const titles = [];
+const products = [];
 const productCards = $("div[data-asin]")
   .find("span.a-size-medium.a-color-base.a-text-normal")
   .each((index, element) => {
-    titles.push($(element).text());
+    products.push({
+      name: $(element).text(), // document.getElementsByClassName("abc")[0].innerText (Vanilla JS Version)
+    });
     // console.log($(element).text());
   });
 
-console.log(titles);
-// const array = $("div[data-asin]").each((i, el) => {
-//   const title = $(el).find(`div a[target="_blank"]`).length;
-//   console.log(title);
-// });
-// console.log(array);
-
-//   .forEach((product) => {
-//     console.log(product.text());
-//   });
-
-console.log("Loop ended");
-// productDivs;
-
-// console.log(productDivs);
-// Object.values(productDivs).forEach((productDiv) => {
-//   const productName = $(productDiv).find(
-//     ".a-size-medium a-color-base a-text-normal"
-//   );
-//   console.log(productName);
-// });
-// console.log(productDivs);
-
-const products = [
-  {
-    name: "IPhone",
-    price: "99999",
-  },
-  {
-    name: "Samsung galaxy s24",
-    price: "79999",
-  },
-  {
-    name: "Samsung galaxy s24",
-    price: "79999",
-  },
-  {
-    name: "Samsung galaxy s24",
-    price: "79999",
-  },
-  {
-    name: "Samsung galaxy s24",
-    price: "79999",
-  },
-  {
-    name: "Samsung galaxy s24",
-    price: "79999",
-  },
-  {
-    name: "Samsung galaxy s24",
-    price: "79999",
-  },
-  {
-    name: "Samsung galaxy s24",
-    price: "79999",
-  },
-  {
-    name: "Samsung galaxy s24",
-    price: "79999",
-  },
-  {
-    name: "Samsung galaxy s24",
-    price: "79999",
-  },
-];
-
+// console.log(products);
 const workbook = xlsx.utils.book_new();
 const worksheet = xlsx.utils.json_to_sheet(products);
 

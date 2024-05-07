@@ -4,7 +4,7 @@
   "description": "My first backend project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon 06-05-2024/index.js",
+    "start": "nodemon 07-05-2024/express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^1.6.8",
     "cheerio": "^1.0.0-rc.12",
+    "express": "^4.19.2",
     "my_test_pkg_calc": "^1.0.1",
     "node-wifi": "^2.0.16",
     "xlsx": "^0.18.5"
