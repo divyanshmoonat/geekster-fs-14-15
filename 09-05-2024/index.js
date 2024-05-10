@@ -1,5 +1,9 @@
 const express = require("express");
+const morgan = require("morgan");
+const reponseTime = require("response-time");
+
 const fs = require("node:fs");
+const responseTime = require("response-time");
 
 const app = express();
 
@@ -23,9 +27,12 @@ const apiKeyMiddleware = (req, res, next) => {
 };
 
 // Application middlewares
-app.use(loggingMiddleware);
+// app.use(loggingMiddleware);
+app.use(morgan("dev"));
 // app.use(apiKeyMiddleware);
-app.use(express.json());
+app.use(express.json()); // It will allow req.body to have data in it
+app.use(express.static("09-05-2024/images"));
+app.use(responseTime());
 
 //abc.com/api/v1/get-products // EndPoint
 
@@ -101,6 +108,18 @@ app.get("/api/v1/get-products", (req, res) => {
   //     message: "Dummy Get Products API",
   //     data: products,
   //   });
+});
+
+app.get("/api/v1/user-details", (req, res) => {
+  const userData = {
+    name: "ABC",
+    mobileNo: "9879879879",
+    profilePicture: "http://localhost:8080/profilepicture.jpg",
+  };
+  res.json({
+    success: true,
+    data: userData,
+  });
 });
 
 const errorMiddleware = (err, req, res, next) => {

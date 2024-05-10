@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "My first backend project",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "nodemon 09-05-2024/index.js",
+    "start": "nodemon 10-05-2024/urlShortner.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -17,8 +18,11 @@
     "axios": "^1.6.8",
     "cheerio": "^1.0.0-rc.12",
     "express": "^4.19.2",
+    "morgan": "^1.10.0",
     "my_test_pkg_calc": "^1.0.1",
+    "nanoid": "^5.0.7",
     "node-wifi": "^2.0.16",
+    "response-time": "^2.3.2",
     "xlsx": "^0.18.5"
   }
 }
