@@ -1,0 +1,8 @@
+{
+    "title": "Junior Software Developer",
+    "description": "Exciting web development opportunity",
+    "company": "Amazon",
+    "location": "Bangalore",
+    "salary": 50000,
+    "age": 30
+}
