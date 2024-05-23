@@ -1,28 +1,9 @@
-const path = require("path");
-
-const multer = require("multer");
-const { v4: uuidv4 } = require("uuid");
-
 const FileModel = require("../models/file");
-
-const uploadDirectoryPath = path.join(__dirname, "..", "files");
-
-console.log(uploadDirectoryPath);
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDirectoryPath), // Folder path where the files will be saved
-  filename: (req, file, cb) => {
-    console.log(file.originalname);
-    const fileName = uuidv4() + path.extname(file.originalname);
-    cb(null, fileName);
-  },
-});
-
-const upload = multer({
-  storage: storage,
-}).single("file"); // Fieldname in your formdata
+const mailService = require("../services/mailService");
+const fileUploadService = require("../services/uploadService");
 
 const uploadFile = async (req, res) => {
+  const upload = fileUploadService.single("file");
   upload(req, res, async (error) => {
     // console.log(req.body);
     if (error) {
@@ -43,7 +24,7 @@ const uploadFile = async (req, res) => {
 
     const newlyInsertedFile = await newFile.save();
 
-    console.log("File uploaded successfully");
+    // console.log("File uploaded successfully");
     res.json({
       success: true,
       message: "File uploaded successfully",
@@ -53,23 +34,72 @@ const uploadFile = async (req, res) => {
 };
 
 const generateDynamicLink = async (req, res) => {
-  res.json({
-    success: true,
-    message: "Generate dynamic link API",
-  });
+  try {
+    const fileId = req.params.uuid;
+    const file = await FileModel.findById(fileId);
+    if (!file) {
+      // DB Doesn't have this file information
+      return res.status(404).json({
+        success: false,
+        message: "File with given ID not found",
+      });
+    }
+
+    // console.log(fileId);
+    res.json({
+      success: true,
+      message: "Generate dynamic link API",
+      result: "http://localhost:8080/files/download/" + fileId,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong, please try again after sometime",
+    });
+  }
 };
 
 const downloadFile = async (req, res) => {
-  res.json({
-    success: true,
-    message: "Download file API",
-  });
+  try {
+    const fileId = req.params.uuid;
+    const file = await FileModel.findById(fileId);
+    if (!file) {
+      // DB Doesn't have this file information
+      return res.end("File with given ID not found");
+    }
+    res.download(file.path, file.originalFilename);
+  } catch (err) {
+    res.end("Something went wrong, please try again after sometime");
+  }
 };
 
 const sendFile = async (req, res) => {
+  console.log(req.body);
+  const { fileId, shareTo } = req.body;
+  const downloadableLink = "http://localhost:8080/files/download/" + fileId;
+
+  const info = await mailService.sendMail({
+    from: "do-not-reply@file-sharing.com", // sender address
+    to: shareTo, // list of receivers
+    subject: "A new file has been shared from File Sharing Platform", // Subject line
+    html: `
+      <html>
+      <head>
+      </head>
+      <body>
+        Your friend has shared a new file with you click the below link to download the file
+      <br />
+      <a href="${downloadableLink}">Click Here</a>
+      </body>
+      </html>
+    `,
+  });
+
+  console.log("Message sent: %s", info.messageId);
+
   res.json({
     success: true,
-    message: "Send file file API",
+    message: "File shared on email successfully",
   });
 };
 
