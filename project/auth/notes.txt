@@ -1,0 +1,33 @@
+12345 => Reable and understandable text (Plain Text)
+$2b$10$0afHoELLu0SCtwUR2.Y4T.yUTy/nPnStpkZpl7csVEb.r2kTxLdZS => Readable but non understandable text (Cipher Text)
+$2b$10$FrcCdlvdU3trEpZbkVE9k.3TgCELJffI2OjorV2fC8H9B6grgGaPC
+
+12345 => abcde
+Encoding => Process to convert text into a standard format which is understood by all the systems
+
+
+Encryption =>  Decryption (keys) (2 Way Process)
+Hashing => 1 Way Process
+
+
+Hashing(plainText, salt);
+
+encryptPassowrd(plainText, key)
+
+decyptPassword(cipherText, key)
+
+Encryption 
+Symmetric => Same key
+Asymetric => Diff
+
+
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8UeD7NJwijT6jxhVE/L8JzboYxQ/9/9zoJI6AT7LsIbIKzkr6f4woTUf4vjy415WaG/SfggWEWHeNB9tXiRFalIpCBcM/zrRuXESyG5ZahwVmCobJsc35yAJ2bsIsot8bfFd5w2s/7+zejrRQV6SAAD3IHFQKFfAXL7sMaUYCIQIDAQAB
+-----END PUBLIC KEY-----
+
+-----BEGIN RSA PRIVATE KEY-----
+MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBALxR4Ps0nCKNPqPGFUT8vwnNuhjFD/3/3OgkjoBPsuwhsgrOSvp/jChNR/i+PLjXlZob9J+CBYRYd40H21eJEVqUikIFwz/OtG5cRLIbllqHBWYKhsmxzfnIAnZuwiyi3xt8V3nDaz/v7N6OtFBXpIAAPcgcVAoV8BcvuwxpRgIhAgMBAAECgYBYByQV+K0lX4XQ01Z85XI9WGutiWwkzHXME86Cvv6Bb2zErVKSDo4LBrjmVrKWqrt1Cq1J5GLEzv+vLmWC4QD5W536wTojNuXRSTUnJoHwuvWvFi55pZG7HRLOW4G098dnWnpYYEAUvzraDI9wIUPUhxhGN3FZCAfilr0NHwTDawJBANkcEY37K4KW+T5Ft7r1AIe+BVfWai8dwuCebQhmvqnUVGt9J16EKw7hrvGvTBW0l+488ohKu6BQB9FBvXyHkccCQQDeDZrbrVnpX5GyThypyHqzmAkAOZ526jhgUugCKk4562j3qQPXZYzcRF863gtIpMUcdG/QZk+2xzFlY0TawMzXAkAxXfaH6FLucNHf3Q54Dnm+Y/DnFjQy3nuPg7abMHGuQD+p6V1oWnlH+v1Cq2+Lh/L8ExO69fNP8qK0bFRf2pvFAkAGljC5w3KfUY5o05hWEPRSz3e04gCpVllFwi/PoKGhZjI+5myOvxxmjECm5l8/UGPobCvE6sQCj/YPI9qvAnkRAkAYsXtszVDrY5Gr/rXlPYF8HYi59KbXZPLxWaxtmqlLKD/387TNsHp3IOz/m272rFWV8LoSlLyOk1VkkASHYB+/
+-----END RSA PRIVATE KEY-----
+
+
+PII (Personal Indenti Info)
