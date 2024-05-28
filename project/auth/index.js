@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const authRoutes = require("./routes/auth");
+const postRoutes = require("./routes/post");
+
+const authMiddleware = require("./middlewares/auth");
 
 const app = express();
 
@@ -13,5 +16,6 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/v1/", authRoutes);
+app.use("/api/v1/post", authMiddleware, postRoutes);
 
 app.listen(8080, () => console.log("App is up and running at port 8080"));

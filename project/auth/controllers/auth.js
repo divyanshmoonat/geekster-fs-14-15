@@ -1,4 +1,7 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const jwtSecretKey = "MY_JWT_SECRET_KEY123";
 
 const UserModel = require("../models/auth");
 
@@ -29,10 +32,19 @@ const login = async (req, res) => {
 
   const isPasswordValid = bcrypt.compareSync(req.body.password, user.password);
   //   console.log(isPasswordValid);
+  const tokenExpiry = Math.ceil(new Date().getTime() / 1_000) + 3600; // 1hr validity
+  const payload = {
+    userId: user._id,
+    name: user.name,
+    exp: tokenExpiry,
+  };
+
+  const token = jwt.sign(payload, jwtSecretKey);
 
   if (isPasswordValid) {
+    // Generate JWT
     return res.json({
-      message: "Login successful",
+      token,
     });
   }
   res.json({
