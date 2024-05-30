@@ -31,3 +31,16 @@ MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBALxR4Ps0nCKNPqPGFUT8vwnNuhjFD/3/
 
 
 PII (Personal Indenti Info)
+
+-----------------------------------------------------------------
+28 May
+
+1. Login and get a token
+2. Every time to get any data/resource use the token
+
+JWT 
+3 Parts
+
+1. Header : Contains meta data (Algo, Type)
+2. Payload (Body) : Contains user information token validity etc
+3. Signature : Verifies authenticity of the token

@@ -14,13 +14,18 @@ const singUp = async (req, res) => {
   const passwordHash = bcrypt.hashSync(req.body.password, salt);
   console.log("HASH=>", passwordHash);
 
-  const newUser = new UserModel({ ...req.body, password: passwordHash });
+  const newUser = new UserModel({
+    ...req.body,
+    role: "USER",
+    password: passwordHash,
+  });
   const newlyInsertedUser = await newUser.save();
   console.log(newlyInsertedUser._id);
   res.json({
     message: "Registration successful, please sign in",
   });
 };
+
 const login = async (req, res) => {
   const user = await UserModel.findOne({ email: req.body.email });
   //   console.log(user);
