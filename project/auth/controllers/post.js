@@ -2,7 +2,21 @@ const PostsModel = require("../models/post");
 const UsersModel = require("../models/auth");
 
 const listPosts = async (req, res) => {
-  const postsList = await PostsModel.find({}).populate("userId");
+  console.log(req.query);
+  let pageNo = req.query.pageNo || 1;
+  let pageSize = req.query.pageSize || 10;
+  pageSize *= 1;
+  pageNo = pageNo * 1;
+  // console.log(pageNo);
+  const postsList = await PostsModel.find({})
+    .skip((pageNo - 1) * pageSize)
+    .limit(pageSize)
+    .sort({ likes: 1 }) // 1 => Ascending, -1 => Descending
+    .populate("userId"); // 100
+  // for (let i = 0; i < postsList.length; i++) {
+  //   const userDetails = await UsersModel.findById(postsList[i].userId);
+  //   postsList[i].userId = userDetails;
+  // }
   res.json({
     results: postsList,
   });
@@ -41,12 +55,27 @@ const deletePost = async (req, res) => {
   res.json({ msg: "Post deleted successfully" });
 };
 
+const postComment = async (req, res) => {
+  console.log(req.params.postId);
+  // comments.push(newComment);
+  await PostsModel.updateOne(
+    { _id: req.params.postId },
+    {
+      $push: {
+        comments: { comment: req.body.comment, userId: req.user._id },
+      },
+    }
+  );
+  res.json({ msg: "Comment posted successfully" });
+};
+
 const postController = {
   listPosts,
   createPost,
   getPostById,
   editPost,
   deletePost,
+  postComment,
 };
 
 module.exports = postController;

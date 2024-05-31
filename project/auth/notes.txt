@@ -44,3 +44,10 @@ JWT
 1. Header : Contains meta data (Algo, Type)
 2. Payload (Body) : Contains user information token validity etc
 3. Signature : Verifies authenticity of the token
+
+
+Pagination : 
+1-10 : Page no 1
+11-20 : Skip first 10 and get next 10 (Page No 2)
+21-30 : Skip first 20 and get next 10 (Page No 3)
+-----

@@ -33,7 +33,7 @@ const validateUser = async (req, res, next) => {
 
   // 3
   const tokenData = jwt.decode(tokenFromHeaders);
-  console.log(tokenData);
+  // console.log(tokenData);
 
   const tokenExp = tokenData.exp;
   const now = Math.ceil(new Date().getTime() / 1_000);

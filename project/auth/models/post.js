@@ -19,6 +19,24 @@ const postSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId, // _id data type
       ref: "users", // Connecting collection (posts <-> users)
     },
+    views: {
+      type: Number,
+    },
+    comments: [
+      {
+        _id: false,
+        comment: {
+          type: String,
+        },
+        date: {
+          type: Date,
+          default: new Date(),
+        },
+        userId: {
+          type: mongoose.Schema.Types.ObjectId,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
