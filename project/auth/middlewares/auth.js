@@ -52,7 +52,7 @@ const validateUser = async (req, res, next) => {
       msg: "Unauthorized user",
     });
   }
-  req.user = user;
+  req.user = user; // This  will be passed to other available middlewares in next sequence and api routes
   next();
 };
 
