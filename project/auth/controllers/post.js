@@ -1,5 +1,15 @@
 const PostsModel = require("../models/post");
 const UsersModel = require("../models/auth");
+const Razorpay = require("razorpay");
+
+const keyId = "rzp_test_GLJrczK2bB2W8X";
+const keySecret = "PmBODMfx3bFbMeR0iIrHSdA1";
+
+// Initialize / login to razorpay / create an instance or object of razorpay
+const razorpay = new Razorpay({
+  key_id: keyId,
+  key_secret: keySecret,
+});
 
 const listPosts = async (req, res) => {
   console.log(req.query);
@@ -69,6 +79,28 @@ const postComment = async (req, res) => {
   res.json({ msg: "Comment posted successfully" });
 };
 
+const placeOrder = async (req, res) => {
+  try {
+    // Create an order on razorpay
+
+    const orderDetails = {
+      amount: 1999 * 100, // Amaount in paisa
+      currency: "INR", // Currency -> Indian Rupees
+      receipt: "ABCD1235", // Order Id
+    };
+
+    const pgResponse = await razorpay.orders.create(orderDetails);
+    console.log("RESPONSE FROM RAZORPAY", pgResponse);
+    res.json({
+      message: "Order placed successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+};
+
 const postController = {
   listPosts,
   createPost,
@@ -76,6 +108,7 @@ const postController = {
   editPost,
   deletePost,
   postComment,
+  placeOrder,
 };
 
 module.exports = postController;

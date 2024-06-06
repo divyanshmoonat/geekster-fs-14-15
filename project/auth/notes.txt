@@ -51,3 +51,22 @@ Pagination :
 11-20 : Skip first 10 and get next 10 (Page No 2)
 21-30 : Skip first 20 and get next 10 (Page No 3)
 -----
+
+Forgot password flow
+/**
+ * 1. Create an api for generating otp /generate-otp
+ *  Body : {
+ * email : "abcd@email.com"
+ * }
+ * Check if email exists in db and generate 6 digit random no (OTP), send the same OTP using nodemailer to user aso save this otp in users's collection in DB
+ * 2. Create an api to validate otp and save new password
+ *  Body : {
+ * email: "abcd@email.com",
+ * otp: "123456",
+ * newPassword: "abcd1234"
+ * }
+ *const user =  UserModel.find({email: req.body.email, otp: req.body.otp})
+ if(user) {
+ UserModel.findByIdAndUpdate(user._id, {password: req.body.password})
+ }
+ */

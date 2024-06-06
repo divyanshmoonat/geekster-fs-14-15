@@ -15,6 +15,8 @@ router.put("/:id", postController.editPost); // Update an existing post.
 
 router.delete("/:id", postController.deletePost); // Delete a post by ID.
 
+router.post("/place-order", postController.placeOrder);
+
 // Commenting routes
 
 router.post("/comments/:postId", postController.postComment);
