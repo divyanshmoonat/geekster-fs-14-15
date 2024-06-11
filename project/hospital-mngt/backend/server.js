@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 
 const userRoutes = require("./routes/user");
 
+const errorHandler = require("./middlewares/errorHandler");
+
 dotenv.config();
 
 mongoose
@@ -16,6 +18,8 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/v1/user", userRoutes);
+
+app.use(errorHandler.errorHandler);
 
 app.listen(process.env.PORT_NO, () =>
   console.log(`Server is up and running at port ${process.env.PORT_NO}`)
