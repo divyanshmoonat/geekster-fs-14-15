@@ -3,7 +3,7 @@ const catchAsync = (fn) => {
     try {
       await fn(req, res, next);
     } catch (err) {
-      console.log("ERROR OCCURED");
+      console.log("ERROR OCCURED", err);
       next(err);
     }
     // Promise.resolve(fn(req, res, next)).catch((err) => {

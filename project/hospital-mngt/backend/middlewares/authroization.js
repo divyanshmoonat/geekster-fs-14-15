@@ -1,6 +1,6 @@
-const authorizer = (role) => {
+const authorizer = (roles) => {
   return (req, res, next) => {
-    if (role === req.user.role) {
+    if (roles.includes(req.user.role)) {
       next();
     } else {
       res.status(403).json({

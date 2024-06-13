@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 const userRoutes = require("./routes/user");
+const appointmentRoutes = require("./routes/appointment");
 
 const errorHandler = require("./middlewares/errorHandler");
 
@@ -18,6 +19,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/appointment", appointmentRoutes);
 
 app.use(errorHandler.errorHandler);
 
